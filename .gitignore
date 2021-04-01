@@ -1,0 +1,5 @@
+/python
+/build*
+test.cpp
+/.vscode
+/model
