@@ -11,5 +11,5 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package( OpenCV REQUIRED )
 
-add_executable(pelak main.cpp detector.cpp)
+add_executable(LPRS main.cpp detector.cpp plate.cpp)
 target_link_libraries(pelak ${OpenCV_LIBS})

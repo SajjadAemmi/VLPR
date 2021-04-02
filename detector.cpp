@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "plate.h"
 #include "detector.h"
 
 using namespace std;
@@ -18,7 +19,7 @@ Detector::~Detector()
     // delete ui;
 }
 
-void Detector::detect(cv::Mat& image)
+void Detector::detect(cv::Mat& image, vector<Plate>& plates)
 {
     start_time = clock();
 
@@ -57,18 +58,13 @@ void Detector::detect(cv::Mat& image)
     vector<int> indices;
     cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold,	indices);
 
-    cv::Point2f vertices[4];
     for (int i = 0; i < indices.size(); i++)
-    {
-        bboxes[indices[i]].points(vertices);
-        for (int k = 0; k < 4; k++)
-            cv::line(image, vertices[k], vertices[(k+1)%4], cv::Scalar(0,255,0), 2);
-
-        // cv::circle(image, centers[indices[i]], 4, cv::Scalar(0, 0, 255), cv::FILLED, cv::LINE_8);
+    {   
+        plates.push_back(Plate(image, bboxes[indices[i]]));
     }
 
     end_time = clock();
-    cout << float(end_time - start_time) / CLOCKS_PER_SEC << " seconds" << endl;
+    cout << "detection time: " << float(end_time - start_time) / CLOCKS_PER_SEC << " s" << endl;
 }
 
 void Detector::preProcess()
@@ -100,7 +96,7 @@ void Detector::postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw, vector<cv::
             bboxes.push_back(cv::RotatedRect(cv::Point2f(c_min + w/2, r_min + h/2), cv::Size2f(w, h), angle));
             // centers.push_back(cv::Point2f(j*4, i*4));
 
-            // Rect brect = rRect.boundingRect();
+            
             // rectangle(test_image, brect, Scalar(255,0,0), 2);
         // }
         }

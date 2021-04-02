@@ -10,12 +10,12 @@
 using namespace std;
 
 
-class Detector
+class Recognizer
 {
 public:
-    Detector();
-    ~Detector();
-    void detect(cv::Mat& image, vector<Plate>& plates);
+    Recognizer();
+    ~Recognizer();
+    void detect(cv::Mat& image);
 
 private:
     cv::dnn::Net net;
