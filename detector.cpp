@@ -12,6 +12,7 @@ Detector::Detector()
     outNames = {"feature_fusion/Conv_7/Sigmoid", "feature_fusion/concat_3"};
     score_threshold = 0.95;
     nms_threshold = 0.2;
+    max_side_resize = 2400;
 }
 
 Detector::~Detector()
@@ -27,12 +28,12 @@ void Detector::detect(cv::Mat& image, vector<Plate>& plates)
     vector<cv::Point2f> centers;
     vector<float> scores;
 
-    int input_col_size = 1024;
-    int input_row_size = 768;
+    int resize_w, resize_h;
+    resize(image, resize_w, resize_h);
 
     cv::Mat blob;
     cv::Scalar mean = cv::Scalar(123.68, 116.78, 103.94);
-    cv::dnn::blobFromImage(image, blob, 1.0, cv::Size(input_col_size, input_row_size), mean, true, false); // Create a 4D blob from a frame.
+    cv::dnn::blobFromImage(image, blob, 1.0, cv::Size(resize_w, resize_h), mean, true, false); // Create a 4D blob from a frame.
     net.setInput(blob, "");
 
     vector<cv::Mat> outs;
@@ -44,27 +45,52 @@ void Detector::detect(cv::Mat& image, vector<Plate>& plates)
     // cout << scores_raw.size << endl;
     // cout << bboxes_raw.size << endl;
     
-    scores_raw = scores_raw.reshape (1, vector<int> {1, bboxes_raw.size[2], bboxes_raw.size[3]});
-    bboxes_raw = bboxes_raw.reshape (1, vector<int> {5, bboxes_raw.size[2], bboxes_raw.size[3]});
+    scores_raw = scores_raw.reshape(1, vector<int> {1, bboxes_raw.size[2], bboxes_raw.size[3]});
+    bboxes_raw = bboxes_raw.reshape(1, vector<int> {5, bboxes_raw.size[2], bboxes_raw.size[3]});
 
     // cout << scores_raw.size << endl;
     // cout << bboxes_raw.size << endl;
 
-    cv::resize(image, image, cv::Size(input_col_size, input_row_size));
-
+    cv::resize(image, image, cv::Size((int)resize_w, (int)resize_h));
     postProcess(bboxes_raw, scores_raw, bboxes, scores);
 
     // nms
     vector<int> indices;
-    cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold,	indices);
+    cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold, indices);
 
     for (int i = 0; i < indices.size(); i++)
-    {   
         plates.push_back(Plate(image, bboxes[indices[i]]));
-    }
 
     end_time = clock();
     cout << "detection time: " << float(end_time - start_time) / CLOCKS_PER_SEC << " s" << endl;
+}
+
+// resize image to a size multiple of 32 which is required by the network
+// param max_side_len: limit of max image size to avoid out of memory in gpu
+// return: the resized image and the resize ratio
+void Detector::resize(cv::Mat image, int &resize_w, int &resize_h)
+{
+    float ratio;
+    resize_w = image.cols;
+    resize_h = image.rows;
+    
+    // limit the max side
+    if(max(resize_h, resize_w) > max_side_resize)
+        if(resize_h > resize_w)
+            ratio = float(max_side_resize) / resize_h;
+        else
+            ratio = float(max_side_resize) / resize_w;
+    else
+        ratio = 1;
+        
+    resize_h = (int)resize_h * ratio;
+    resize_w = (int)resize_w * ratio;
+
+    if(resize_h % 32 != 0)
+        resize_h = (resize_h / 32 - 1) * 32;
+
+    if(resize_w % 32 != 0)
+        resize_w = (resize_w / 32 - 1) * 32;
 }
 
 void Detector::preProcess()
@@ -72,7 +98,7 @@ void Detector::preProcess()
 
 } 
 
-void Detector::postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores)
+void Detector::postProcess(cv::Mat &bboxes_raw, cv::Mat &scores_raw, vector<cv::RotatedRect> &bboxes, vector<float> &scores)
 {
     int r_min, r_max, c_min, c_max, w, h;
     float angle;

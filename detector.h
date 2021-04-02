@@ -24,8 +24,9 @@ private:
     clock_t end_time;
     float score_threshold;
     float nms_threshold;
+    int max_side_resize;
 
-    void resize();
+    void resize(cv::Mat image, int &resize_w, int &resize_h);
     void preProcess();
     void postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores);
 

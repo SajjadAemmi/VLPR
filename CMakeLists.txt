@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
-project(pelak)
+project(LPRS)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 
@@ -12,4 +12,4 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package( OpenCV REQUIRED )
 
 add_executable(LPRS main.cpp detector.cpp plate.cpp)
-target_link_libraries(pelak ${OpenCV_LIBS})
+target_link_libraries(LPRS ${OpenCV_LIBS})

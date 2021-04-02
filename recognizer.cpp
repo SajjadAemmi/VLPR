@@ -7,8 +7,7 @@ using namespace std;
 
 Recognizer::Recognizer()
 {
-    net = cv::dnn::readNet("model/detector.pb");
-    outNames = {"feature_fusion/Conv_7/Sigmoid", "feature_fusion/concat_3"};
+    net = cv::dnn::readNet("model/recognizer.onnx");
     score_threshold = 0.95;
     nms_threshold = 0.2;
 }
