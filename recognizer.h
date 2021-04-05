@@ -15,11 +15,16 @@ class Recognizer
 public:
     Recognizer();
     ~Recognizer();
-    void detect(cv::Mat& image);
+    void recognize(cv::Mat& image);
 
 private:
     cv::dnn::Net net;
-    vector<string> outNames;
+    cv::Mat blob;
+    cv::Scalar mean;
+    float scalefactor;
+    int plate_width;
+    int plate_height;
+    vector<cv::Mat> outs;
     clock_t start_time; 
     clock_t end_time;
     float score_threshold;

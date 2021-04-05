@@ -11,5 +11,5 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package( OpenCV REQUIRED )
 
-add_executable(LPRS main.cpp detector.cpp plate.cpp)
+add_executable(LPRS main.cpp plate.cpp detector.cpp recognizer.cpp)
 target_link_libraries(LPRS ${OpenCV_LIBS})
