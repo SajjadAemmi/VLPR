@@ -4,3 +4,4 @@ test.cpp
 /.vscode
 /model
 .DS_Store
+/input

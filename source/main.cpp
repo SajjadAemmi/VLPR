@@ -44,7 +44,7 @@ void processImage(cv::Mat &image)
 
 int main(int argc, char *argv[]) 
 {
-  string input_file_path = "input/9.jpg";
+  string input_file_path = "input/C0001.mp4";
   filesystem::path path(input_file_path);
   
   if(path.extension() == ".jpg")
