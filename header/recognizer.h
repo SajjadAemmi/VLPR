@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
 
+
 using namespace std;
 
 
@@ -15,23 +16,25 @@ class Recognizer
 public:
     Recognizer();
     ~Recognizer();
-    void recognize(cv::Mat& image);
+    bool recognize(cv::Mat image, string* text);
 
 private:
     cv::dnn::Net net;
     cv::Mat blob;
     cv::Scalar mean;
-    float scalefactor;
+    cv::Scalar std;
+    double scalefactor;
     int plate_width;
     int plate_height;
-    vector<cv::Mat> outs;
+    cv::Mat outs;
     clock_t start_time; 
     clock_t end_time;
-    float score_threshold;
-    float nms_threshold;
+    double score;
+    double score_threshold;
+    string alphabet;
 
     void resize();
     void preProcess();
-    void postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores);
+    string postProcess(cv::Mat input);
 
 };

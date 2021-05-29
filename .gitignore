@@ -2,6 +2,7 @@
 /build*
 test.cpp
 /.vscode
-/model
+/models
 .DS_Store
-/input
+/input/*.mp4
+*.pro.user*
