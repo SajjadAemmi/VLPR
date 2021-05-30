@@ -15,8 +15,9 @@ cmake --build build
 
 ## ToDo list
 - [x] video processing
-- [ ] ocr
+- [x] ocr
+- [x] gui
+- [x] tracker
 - [ ] time optimization
 - [ ] memory optimization
-- [ ] gui
 - [ ] train source code
