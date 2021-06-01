@@ -40,6 +40,6 @@ private:
 
     void resize(cv::Mat image, int &resize_w, int &resize_h);
     void preProcess();
-    void postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores);
+    void postProcess(cv::Mat& geo, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores);
 
 };

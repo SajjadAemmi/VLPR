@@ -5,12 +5,9 @@
 #include <opencv2/highgui.hpp>
 #include <iostream>
 #include <cstring>
-
 using namespace std;
 using namespace cv;
-
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ){
   // show help
   if(argc<2){
     cout<<
@@ -25,11 +22,7 @@ int main( int argc, char** argv )
   Rect roi;
   Mat frame;
   // create a tracker object
-  // Ptr<Tracker> tracker = TrackerCSRT::create();
-
-  vector<Ptr<Tracker>> trackers;
-  trackers.push_back(TrackerGOTURN::create());
-
+  Ptr<Tracker> tracker = TrackerMIL::create();
   // set input video
   std::string video = argv[1];
   VideoCapture cap(video);
@@ -40,7 +33,7 @@ int main( int argc, char** argv )
   if(roi.width==0 || roi.height==0)
     return 0;
   // initialize the tracker
-  trackers[0]->init(frame,roi);
+  tracker->init(frame,roi);
   // perform the tracking process
   printf("Start the tracking process, press ESC to quit.\n");
   for ( ;; ){
@@ -50,7 +43,7 @@ int main( int argc, char** argv )
     if(frame.rows==0 || frame.cols==0)
       break;
     // update the tracking result
-    trackers[0]->update(frame,roi);
+    tracker->update(frame,roi);
     // draw the tracked object
     rectangle( frame, roi, Scalar( 255, 0, 0 ), 2, 1 );
     // show image with the tracked object

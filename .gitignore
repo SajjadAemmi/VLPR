@@ -1,10 +1,9 @@
-/python
 /build*
-test.cpp
 /.vscode
 /models
 .DS_Store
 /input
 /models
-/input/*.mp4
 *.pro.user*
+__pycache__
+detector_tf
