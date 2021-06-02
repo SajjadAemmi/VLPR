@@ -31,6 +31,7 @@ private:
     vector<cv::RotatedRect> bboxes;
     vector<cv::Point2f> centers;
     vector<float> scores;
+    vector<vector<cv::Point2f>> rois;
 
     clock_t start_time; 
     clock_t end_time;
@@ -40,6 +41,6 @@ private:
 
     void resize(cv::Mat image, int &resize_w, int &resize_h);
     void preProcess();
-    void postProcess(cv::Mat& geo, cv::Mat& scores_raw, vector<cv::RotatedRect>& bboxes, vector<float>& scores);
+    void postProcess(cv::Mat& bboxes_raw, cv::Mat& scores_raw);
 
 };

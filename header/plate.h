@@ -20,13 +20,14 @@ private:
     static cv::Point2f dst_corners[4];
 
 public:
-    Plate(cv::Mat& image, cv::RotatedRect rotated_rect, int id);
+    Plate(cv::Mat& image, cv::RotatedRect rotated_rect, vector<cv::Point2f> roi, int id);
     ~Plate();
     void updateImage(cv::Mat image);
     void perspectiveTransform(cv::Mat& image);
 
     cv::RotatedRect rotated_rect;
-    cv::Rect roi;
+    cv::Rect rect;
+    vector<cv::Point2f> roi;
     cv::Mat image;
     string text;
     int not_found;
