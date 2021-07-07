@@ -1,9 +1,8 @@
-/build*
-/.vscode
-/models
 .DS_Store
+.vscode
+.idea
+/build*
+/models
 /input
 /models
 *.pro.user*
-__pycache__
-detector_tf

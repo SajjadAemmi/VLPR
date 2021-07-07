@@ -11,12 +11,12 @@
 using namespace std;
 
 
-class Recognizer
+class PlateRecognizer
 {
 public:
-    Recognizer();
-    ~Recognizer();
-    bool recognize(cv::Mat image, string* text);
+    PlateRecognizer();
+    ~PlateRecognizer();
+    bool recognize(Plate& plate);
 
 private:
     cv::dnn::Net net;
