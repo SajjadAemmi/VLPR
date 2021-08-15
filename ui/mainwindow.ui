@@ -6,15 +6,68 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1415</width>
+    <width>1465</width>
     <height>831</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Vehicle and License Plate Recognition</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btn_direction_up">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/arrow_up.ico</normaloff>../icons/arrow_up.ico</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_direction_down">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/arrow_down.ico</normaloff>../icons/arrow_down.ico</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item>
      <widget class="QSlider" name="slider">
       <property name="value">
@@ -34,21 +87,21 @@
     <item>
      <widget class="QLabel" name="lbl_preview">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1024</width>
-        <height>768</height>
+        <width>0</width>
+        <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1024</width>
-        <height>768</height>
+        <width>1280</width>
+        <height>720</height>
        </size>
       </property>
       <property name="text">
@@ -65,12 +118,19 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
+       <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLineEdit" name="tb_path"/>
+         <widget class="QLineEdit" name="tb_path">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btn_browse">
@@ -89,8 +149,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../build-license-plate-Desktop-Debug/qmake_qmake_immediate.qrc">
-            <normaloff>:/icon/stop.ico</normaloff>:/icon/stop.ico</iconset>
+           <iconset>
+            <normaloff>../icons/stop.ico</normaloff>../icons/stop.ico</iconset>
           </property>
          </widget>
         </item>
@@ -121,8 +181,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../build-license-plate-Desktop-Debug/qmake_qmake_immediate.qrc">
-            <normaloff>:/icon/play.ico</normaloff>:/icon/play.ico</iconset>
+           <iconset>
+            <normaloff>../icons/play.ico</normaloff>../icons/play.ico</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -138,8 +198,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../../build-license-plate-Desktop-Debug/qmake_qmake_immediate.qrc">
-            <normaloff>:/icon/pause.ico</normaloff>:/icon/pause.ico</iconset>
+           <iconset>
+            <normaloff>../icons/pause.ico</normaloff>../icons/pause.ico</iconset>
           </property>
          </widget>
         </item>
@@ -153,20 +213,40 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
         <attribute name="horizontalHeaderStretchLastSection">
          <bool>true</bool>
         </attribute>
         <attribute name="verticalHeaderMinimumSectionSize">
          <number>64</number>
         </attribute>
+        <column>
+         <property name="text">
+          <string>Text</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Image</string>
+         </property>
+        </column>
        </widget>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Bus</string>
+           <string>Bicycle</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="lbl_class_1">
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -174,6 +254,34 @@
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>Car</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Bus</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="lbl_class_2">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="lbl_class_0">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="lbl_class_4">
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -191,43 +299,8 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Bicycle</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="lbl_class_0">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="lbl_class_1">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="lbl_class_2">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="1">
          <widget class="QLabel" name="lbl_class_3">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="lbl_class_4">
           <property name="text">
            <string>0</string>
           </property>
@@ -244,15 +317,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1415</width>
-     <height>22</height>
+     <width>1465</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../../build-license-plate-Desktop-Debug/qmake_qmake_immediate.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -1,0 +1,3 @@
+/Users/sajjadaemmi/Programming/LPRS/build/CMakeFiles/rebuild_cache.dir
+/Users/sajjadaemmi/Programming/LPRS/build/CMakeFiles/edit_cache.dir
+/Users/sajjadaemmi/Programming/LPRS/build/CMakeFiles/LPRS.dir

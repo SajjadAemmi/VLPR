@@ -1,8 +1,8 @@
 .DS_Store
 .vscode
 .idea
+input
+output
 /build*
-/models
-/input
 /models
 *.pro.user*
