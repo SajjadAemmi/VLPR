@@ -1,6 +1,7 @@
+cython
 sortedcontainers
 numba
 matplotlib
 scikit-image
-scikit_learn==0.21.3
+scipy
 filterpy

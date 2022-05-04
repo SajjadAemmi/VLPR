@@ -100,6 +100,6 @@ class Main(QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QApplication([])
+    app = QApplication(sys.argv)
     widget = Main()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

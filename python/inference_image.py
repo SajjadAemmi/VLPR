@@ -6,13 +6,12 @@ from pathlib import Path
 import cv2
 
 from source.plate_detector import PlateDetector
-from source.plate_tracker import PlateTracker
 from source.plate_recognizer import PlateRecognizer
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
-def run():
+def main():
     output_dir_path = os.path.join(args.output, Path(args.input).stem)
     if not os.path.exists(output_dir_path):
         os.makedirs(output_dir_path)
@@ -53,11 +52,11 @@ def run():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Vehicle and License Plate Recognition')
-    parser.add_argument('-i', '--input', help="input image path", default="./input/8.bmp", type=str)
-    parser.add_argument('-o', '--output', help="output directory path", default="./output", type=str)
+    parser.add_argument('-i', '--input', help="input image path", default="IO/input/7.bmp", type=str)
+    parser.add_argument('-o', '--output', help="output directory path", default="IO/output", type=str)
     parser.add_argument("--save", default=True, action="store_true", help="whether to save")
     parser.add_argument("--gpu", default=False, action="store_true", help='Use gpu inference')
     parser.add_argument("--show", default=False, action="store_true", help="show live result")
     args = parser.parse_args()
 
-    run()
+    main()

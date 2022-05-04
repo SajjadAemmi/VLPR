@@ -65,17 +65,12 @@ class Process(QThread):
         if file_extension.lower() in ['.jpg', '.jpeg', '.png', '.bmp']:
             image = cv2.imread(self.input_file_path)
             self.processImage(image)
-
         elif file_extension.lower() in ['.mp4', '.mov', '.mkv']:
-            self.video_cap = cv2.VideoCapture(self.video_path)
-
+            self.video_cap = cv2.VideoCapture(self.input_file_path)
             while True:
                 ret, frame = self.video_cap.read()
-
                 if not ret:
                     break
-
                 self.signalShowPreview.emit(frame)
-
         else:
             print('error! input file extension is not supported')
